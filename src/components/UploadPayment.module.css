@@ -1,0 +1,62 @@
+/* uploadPayment.module.css */
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container label {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .container input, .container select {
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .container input[type="file"] {
+    border: none;
+  }
+  
+  .container button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .container p {
+    color: #ff0000;
+    margin-top: 8px;
+    text-align: center;
+  }
+  

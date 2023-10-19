@@ -1,0 +1,31 @@
+/* menustrip.module.css */
+
+.MenuStrip {
+    display: block;
+    background-color: #333; /* Background color of the menu */
+    padding: 10px; /* Adjust the padding as needed */
+  }
+  
+  .MenuStrip ul {
+    list-style: none; /* Remove the bullets (dots) from the list */
+    display: flex; /* Display the list items horizontally */
+    padding: 0;
+  }
+  
+  .MenuStrip li {
+    margin-right: 20px; /* Adjust the margin between menu items as needed */
+    font-size: 14px; /* Set the font size for menu items */
+    color:#FFF
+  }
+  
+  .MenuStrip li:last-child {
+    margin-right: 0; /* Remove margin for the last menu item */
+  }
+  
+  .MenuStrip li:hover {
+    cursor: pointer;
+    color: aqua; /* Change color on hover */
+  }
+  
+  /* Add any other styling you want here, such as changing the background or text color on hover */
+  
