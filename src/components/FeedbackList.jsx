@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './FeedbackList.module.css';
+import { server_ip_with_port } from '../utils/server-ip';
 
 const FeedbackList = () => {
   const [feedbackData, setFeedbackData] = useState([]);
 
   useEffect(() => {
     // Fetch feedback data from the API endpoint
-    fetch('http://localhost:3005/feedback/getfeedback')
+    fetch(server_ip_with_port + '/feedback/getfeedback')
       .then((response) => response.json())
       .then((data) => setFeedbackData(data))
       .catch((error) => console.error('Error fetching feedback data:', error));

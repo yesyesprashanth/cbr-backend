@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './PaymentList.module.css';
+import { server_ip_with_port } from '../utils/server-ip';
 
 const PaymentList = () => {
   const [paymentList, setPaymentList] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3005/payment/getpaymentlist')
-      .then((response) => {         
+    axios.get(server_ip_with_port + '/payment/getpaymentlist')
+      .then((response) => {    
+        if(Array.isArray(response.data))
         setPaymentList(response.data);
+        else 
+          console.log(response.data);             
       })
       .catch((error) => {
         console.error('Error fetching payment data:', error);
@@ -18,7 +22,7 @@ const PaymentList = () => {
   const downloadReceipt = async(emailid, filename) => {
     console.log(emailid);
     try {
-      const response = await axios.get(`http://localhost:3005/payment/downloadreceipt?emailid=${emailid}`, {
+      const response = await axios.get(server_ip_with_port + `/payment/downloadreceipt?emailid=${emailid}`, {
         responseType: 'blob',        
       });
 

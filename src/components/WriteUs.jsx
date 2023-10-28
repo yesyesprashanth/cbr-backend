@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './WriteUs.module.css';
+import { server_ip_with_port } from '../utils/server-ip';
 
 const WriteUs = () => {
 
@@ -22,7 +23,7 @@ const WriteUs = () => {
     e.preventDefault();
 
     try {    
-      const response = await fetch('http://localhost:3005/feedback/postfeedback', {
+      const response = await fetch(server_ip_with_port + '/feedback/postfeedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +39,9 @@ const WriteUs = () => {
         setResponse('Error submitting feedback');
       }
     } catch (error) {
+      console.log(error);
       setResponse('Error submitting feedback');
+      
     }
   };
 

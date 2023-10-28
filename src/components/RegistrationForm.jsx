@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './RegistrationForm.module.css';
+import { server_ip_with_port } from '../utils/server-ip';
 
 const RegistrationForm = () => {
 
@@ -24,7 +25,8 @@ const RegistrationForm = () => {
   };
 
   const validateForm = () => {
-    const { name, organization, emailid } = formData;
+    console.log(formData);
+    const { name, organization, emailid } = formData;        
     if (!name || !organization || !emailid) {
       setError('All fields are mandatory');
       return false;
@@ -44,7 +46,7 @@ const RegistrationForm = () => {
     console.log(formData);
     try {
       // Send a POST request to your API with formData
-      const response = await fetch('http://localhost:3005/registration/userregistration', {
+      const response = await fetch(server_ip_with_port + '/registration/userregistration', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +58,7 @@ const RegistrationForm = () => {
 
       if (response.ok) {        
         const result = await response.json();
-        console.log(result);
+        setError(result);
       } else {        
         const data = await response.json();
         setError(data.message);
@@ -102,8 +104,8 @@ const RegistrationForm = () => {
           <label>Email:</label>
           <input
             type="text"
-            name="email"
-            value={formData.email}
+            name="emailid"
+            value={formData.emailid}
             onChange={handleChange}
           />
         </div>

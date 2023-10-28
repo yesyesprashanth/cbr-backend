@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './Login.css'; // Import the CSS file with the styles
+import { server_ip_with_port } from '../utils/server-ip';
 
 function Login({ onLogin }) {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  console.log(server_ip_with_port);
 
   const handleLogin = () => {
     if (password === 'committee_members') {

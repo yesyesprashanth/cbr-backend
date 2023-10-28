@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import { server_ip_with_port } from '../utils/server-ip';
 
 const DownloadReceipt = () => {
   const downloadReceipt = async () => {
     try {
-      const response = await axios.get('http://localhost:3005/payment/readreceipt', {
+      const response = await axios.get(server_ip_with_port + '/payment/readreceipt', {
         responseType: 'blob',
       });
 

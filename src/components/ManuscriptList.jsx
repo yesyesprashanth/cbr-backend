@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './ManuscriptList.module.css'
+import { server_ip_with_port } from '../utils/server-ip';
 
 function ManuscriptList() {
   const [manuscriptData, setManuscriptData] = useState([]);
 
   useEffect(() => {
     // Fetch data from the API
-    axios.get('http://localhost:3005/manuscript/getmanuscriptlist')
-      .then((response) => {       
-        setManuscriptData(response.data);
+    axios.get(server_ip_with_port + '/manuscript/getmanuscriptlist')
+      .then((response) => {     
+        console.log(response.data);
+        if(Array.isArray(response.data))
+          setManuscriptData(response.data);
+        else 
+          console.log(response.data);
       })
       .catch((error) => {
         console.error('Error fetching manuscript data:', error);
@@ -19,7 +24,7 @@ function ManuscriptList() {
   const handleDownload = async (email, filename, fieldName) => {
     try {
       // Send a request to download the manuscript file
-      const response = await axios.get(`http://localhost:3005/manuscript/downloadmanuscript?emailid=${email}&fieldname=${fieldName}`, {
+      const response = await axios.get(server_ip_with_port + `/manuscript/downloadmanuscript?emailid=${email}&fieldname=${fieldName}`, {
         responseType: 'blob',
       });
 
@@ -49,32 +54,39 @@ function ManuscriptList() {
           </tr>
         </thead>
         <tbody>
-          {manuscriptData.map((row, index) => (
-            <tr key={index}>
-              <td>{row.emailid}</td>
-              <td>
-                {row.filename1 && (
-                  <button onClick={() => handleDownload(row.emailid, row.filename1, "abstractpaper")}>
-                    Download
-                  </button>
-                )}
-              </td>
-              <td>
-                {row.filename2 && (
-                  <button onClick={() => handleDownload(row.emailid, row.filename2, "plagiarismreport")}>
-                    Download
-                  </button>
-                )}
-              </td>
-              <td>
-                {row.filename3 && (
-                  <button onClick={() => handleDownload(row.emailid, row.filename3, "fullpaper")}>
-                    Download
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
+          { manuscriptData && manuscriptData.length > 0 ?          
+              (manuscriptData.map((row, index) => (
+                <tr key={index}>
+                  <td>{row.emailid}</td>
+                  <td>
+                    {row.filename1 && (
+                      <button onClick={() => handleDownload(row.emailid, row.filename1, "abstractpaper")}>
+                        Download
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    {row.filename2 && (
+                      <button onClick={() => handleDownload(row.emailid, row.filename2, "plagiarismreport")}>
+                        Download
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    {row.filename3 && (
+                      <button onClick={() => handleDownload(row.emailid, row.filename3, "fullpaper")}>
+                        Download
+                      </button>
+                    )}
+                  </td>
+                </tr>
+                ))
+              ):(
+                <tr>
+                  <td colSpan={4}>No data available</td>
+                </tr>
+              )      
+        }
         </tbody>
       </table>
     </div>

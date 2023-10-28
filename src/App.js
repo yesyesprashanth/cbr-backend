@@ -17,11 +17,13 @@ function App() {
 
   const onMenuItemClick = (componentName) => {
     setVisibleComponent(componentName);
+    if(componentName==='Login')
+    setLoggedIn(false);  
   };
 
   const handleLogin = (status) => {
-    setLoggedIn(status);
-    if(loggedIn)
+    setLoggedIn(status);   
+    if(status)
       setVisibleComponent('UserList');
   };
 

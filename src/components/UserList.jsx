@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styles from './UserList.module.css';
 import axios from 'axios';
+import { server_ip_with_port } from '../utils/server-ip';
+
 
 function UserList() {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
+    
     // Fetch data from the API
-    axios.get('http://localhost:3005/registration/getuserlist')
+    axios.get(server_ip_with_port +'/registration/getuserlist')
       .then((response) => {
         setUserList(response.data);
       })
@@ -29,14 +32,20 @@ function UserList() {
           </tr>
         </thead>
         <tbody>
-          {userList.map((user, index) => (
-            <tr key={index}>
-              <td>{user.emailid}</td>
-              <td>{user.name}</td>
-              <td>{user.role}</td>
-              <td>{user.organisation}</td>
-            </tr>
-          ))}
+          {userList && userList.length > 0 ? (
+            userList.map((user, index) => (
+              <tr key={index}>
+                <td>{user.emailid}</td>
+                <td>{user.name}</td>
+                <td>{user.role}</td>
+                <td>{user.organisation}</td>
+              </tr>
+            ))
+            ) : (
+              <tr>
+                <td colSpan="4">No data available</td>
+              </tr>  
+            )}
         </tbody>
       </table>
     </div>

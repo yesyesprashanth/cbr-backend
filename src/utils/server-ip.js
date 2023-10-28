@@ -1,0 +1,1 @@
+export const server_ip_with_port = process.env.REACT_APP_PROTOCOL + "://" + process.env.REACT_APP_SERVER_IP + ":" + process.env.REACT_APP_SERVER_PORT;

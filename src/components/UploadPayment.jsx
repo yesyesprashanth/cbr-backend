@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './UploadPayment.module.css';
+import { server_ip_with_port } from '../utils/server-ip';
 
 function UploadPayment() {
   const [emailid, setEmailId] = useState('');
@@ -29,13 +30,15 @@ function UploadPayment() {
     formData.append('file', file);
 
      try {
-      const response = await fetch('http://localhost:3005/payment/postpayment', {
+      const response = await fetch(server_ip_with_port + '/payment/postpayment', {
         method: 'POST',
         body: formData,
       });
 
+      
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setResponseMessage(data);
       } else {
         setResponseMessage('Error while uploading payment details.');
@@ -51,7 +54,7 @@ function UploadPayment() {
     // Example: Simulating a form submission (remove this in your actual code)
     setTimeout(() => {
       setIsSubmitting(false);
-      setResponseMessage('Payment uploaded successfully!');
+      // setResponseMessage('Payment uploaded successfully!');
     }, 1000);
   };
 
